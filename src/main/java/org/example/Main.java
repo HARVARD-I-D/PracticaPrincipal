@@ -7,10 +7,14 @@ import org.jsoup.Jsoup;
 
 public class Main {
     public static void main(String[] args) {
-        String apiKey = "EIURB4K339TBW8NQ";
-        String url = "https://www.alphavantage.co/query?function=WTI&interval=daily&apikey=" + apiKey;
+        String apiKey_Crude = "EIURB4K339TBW8NQ";
+        String url1 = "https://www.alphavantage.co/query?function=WTI&interval=daily&apikey=" + apiKey_Crude;
 
         WTIExtractor WTI = new WTIExtractor();
-        WTI.Extractor(url);
+        WTI.Extractor(url1);
+
+        String url2 = "https://www.alphavantage.co/query?function=BRENT&interval=daily&apikey=" + apiKey_Crude;
+        BrentExtractor BRENT = new BrentExtractor();
+        BRENT.Extractor(url2);
     }
-}
+}   
