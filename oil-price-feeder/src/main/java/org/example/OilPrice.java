@@ -3,7 +3,7 @@ package org.example;
 public class OilPrice {
     String date;
     Double value;
-
+    OilType type;
 
     public OilPrice(String date, Double value) {
         this.date = date;
