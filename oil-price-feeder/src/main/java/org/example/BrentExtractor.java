@@ -1,6 +1,7 @@
 package org.example;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -18,10 +19,9 @@ public class BrentExtractor {
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(jsonResponse, JsonObject.class);
 
-            System.out.println(gson.toJson(jsonObject));
-
             if (jsonObject.has("data")) {
-                System.out.println("Datos del Brent: " + jsonObject.get("data").toString());
+                JsonArray data = jsonObject.get("data").getAsJsonArray();
+                System.out.println("Datos del org.example.Brent: " + data);
             }
 
         } catch (Exception e) {

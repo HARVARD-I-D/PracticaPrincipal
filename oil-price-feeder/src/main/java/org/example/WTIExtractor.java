@@ -18,8 +18,6 @@ public class WTIExtractor {
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(jsonResponse, JsonObject.class);
 
-            System.out.println(gson.toJson(jsonObject));
-
             if (jsonObject.has("data")) {
                 System.out.println("Datos del WTI: " + jsonObject.get("data").toString());
             }
