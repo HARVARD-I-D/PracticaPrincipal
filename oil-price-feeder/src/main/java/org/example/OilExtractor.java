@@ -7,7 +7,7 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 public class OilExtractor {
-    public void Extractor(String url){
+    public void Extractor(String url, OilType type){
         try {
             Connection.Response response = Jsoup.connect(url)
                     .ignoreContentType(true)
@@ -21,7 +21,8 @@ public class OilExtractor {
 
             if (jsonObject.has("data")) {
                 JsonArray data = jsonObject.get("data").getAsJsonArray();
-                System.out.println(data);
+                OilProcessor processor = new OilProcessor();
+                processor.OilProcessor(data, type);
             }
 
         } catch (Exception e) {
