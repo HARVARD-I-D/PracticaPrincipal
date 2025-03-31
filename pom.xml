@@ -9,8 +9,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>news</module>
+        <module>news-feeder</module>
         <module>oil-price-feeder</module>
+        <module>news-feeder</module>
     </modules>
 
     <properties>
