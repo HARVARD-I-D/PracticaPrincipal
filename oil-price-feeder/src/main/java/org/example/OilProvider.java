@@ -1,6 +1,5 @@
 package org.example;
 
 public interface OilProvider {
-
-    OilPrice provide();
+    OilPrice provide(String arg);
 }

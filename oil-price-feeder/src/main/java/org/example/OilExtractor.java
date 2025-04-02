@@ -22,7 +22,7 @@ public class OilExtractor {
             if (jsonObject.has("data")) {
                 JsonArray data = jsonObject.get("data").getAsJsonArray();
                 OilProcessor processor = new OilProcessor();
-                processor.OilProcessor(data, type);
+                processor.Processor(data, type);
             }
 
         } catch (Exception e) {

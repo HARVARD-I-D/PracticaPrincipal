@@ -8,7 +8,7 @@ public class OilProcessor {
     ArrayList<OilPrice> oilPrices_Brent;
     ArrayList<OilPrice> oilPrices_WTI;
 
-    public void OilProcessor(JsonArray data, OilType type){
+    public void Processor(JsonArray data, OilType type){
         this.oilPrices_Brent = new ArrayList<>();
         this.oilPrices_WTI = new ArrayList<>();
 
@@ -19,13 +19,14 @@ public class OilProcessor {
 
             if(type == OilType.Brent){
                 oilPrices_Brent.add(new OilPrice(date, value));
-                this.getOilPrices_Brent();
             }
             else if (type == OilType.WTI) {
                 oilPrices_WTI.add(new OilPrice(date, value));
-                this.getOilPrices_WTI();
+
             }
         }
+        this.getOilPrices_Brent();
+        this.getOilPrices_WTI();
     }
 
     public ArrayList<OilPrice> getOilPrices_Brent() {
