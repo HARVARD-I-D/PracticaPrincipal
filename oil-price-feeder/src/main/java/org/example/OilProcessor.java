@@ -22,7 +22,6 @@ public class OilProcessor {
             }
             else if (type == OilType.WTI) {
                 oilPrices_WTI.add(new OilPrice(date, value));
-
             }
         }
         this.getOilPrices_Brent();
