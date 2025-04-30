@@ -7,7 +7,11 @@ public class SQLiteOilStore implements OilStore {
     public SQLiteOilStore() {
         try (Connection conn = DriverManager.getConnection(URL);
              Statement stmt = conn.createStatement()) {
-            String sql = "CREATE TABLE IF NOT EXISTS oil_prices (id INTEGER PRIMARY KEY AUTOINCREMENT, value REAL, date TEXT)";
+            String sql = "CREATE TABLE IF NOT EXISTS oil_prices (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "value REAL, " +
+                    "date TEXT, " +
+                    "type TEXT)";
             stmt.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -16,20 +20,15 @@ public class SQLiteOilStore implements OilStore {
 
     @Override
     public void save(OilPrice oilPrice) {
-        String sql = "INSERT INTO oil_prices (value, date) VALUES (?, ?)";
+        String sql = "INSERT INTO oil_prices (value, date, type) VALUES (?, ?, ?)";
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setDouble(1, oilPrice.getValue());
-            pstmt.setString(2, oilPrice.getDate());
+            pstmt.setString(2, oilPrice.getTsAsString());
+            pstmt.setString(3, oilPrice.getType().toString());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public OilPrice load() {
-        String sql = "SELECT value, date FROM oil_prices WHERE id = ?";
-        return null;
     }
 }

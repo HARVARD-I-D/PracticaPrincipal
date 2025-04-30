@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.List;
+
 public interface OilProvider {
-    OilPrice provide(String arg);
+    List<OilPrice> provide();
 }
