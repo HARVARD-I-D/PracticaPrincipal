@@ -26,7 +26,7 @@ public class SQLiteOilStore implements OilStore {
             pstmt.setDouble(1, oilPrice.getValue());
             pstmt.setString(2, oilPrice.getTsAsString());
             pstmt.setString(3, oilPrice.getType().toString());
-            pstmt.executeUpdate();
+            pstmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

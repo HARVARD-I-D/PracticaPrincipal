@@ -3,12 +3,14 @@ package org.example;
 import java.time.Instant;
 
 public class OilPrice {
-    Instant ts;
-    String type;
-    Double value;
+    private final Instant ts;
+    private final String ss;
+    private final String type;
+    private final Double value;
 
-    public OilPrice(Instant ts, Double value, String type) {
+    public OilPrice(Instant ts, String ss, Double value, String type) {
         this.ts = ts;
+        this.ss = ss;
         this.value = value;
         this.type = type;
     }
@@ -27,5 +29,9 @@ public class OilPrice {
 
     public String getType() {
         return type;
+    }
+
+    public String getSs() {
+        return ss;
     }
 }

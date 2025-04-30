@@ -15,13 +15,15 @@ public class OilProcessor {
             JsonObject entry = data.get(i).getAsJsonObject();
             String dateStr = entry.has("date") ? entry.get("date").getAsString() : null;
             Instant date = dateStr != null ? Instant.parse(dateStr + "T00:00:00Z") : null;
-            Double value = entry.has("value") ? entry.get("value").getAsDouble() : null;
+            Double value = Double.NaN;
+            if (entry.has("value") && !entry.get("value").getAsString().equals("."))
+                value = entry.get("value").getAsDouble();
 
             if(type == OilType.Brent){
-                oilPrices.add(new OilPrice(date, value, "Brent"));
+                oilPrices.add(new OilPrice(date,"AlphaVantage", value, "Brent"));
             }
             else if (type == OilType.WTI) {
-                oilPrices.add(new OilPrice(date, value, "WTI"));
+                oilPrices.add(new OilPrice(date, "AlphaVantage", value, "WTI"));
             }
         }
     }
