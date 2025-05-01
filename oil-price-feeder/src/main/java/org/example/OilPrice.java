@@ -1,19 +1,37 @@
 package org.example;
 
-public class OilPrice {
-    String date;
-    Double value;
+import java.time.Instant;
 
-    public OilPrice(String date, Double value) {
-        this.date = date;
+public class OilPrice {
+    private final Instant ts;
+    private final String ss;
+    private final String type;
+    private final Double value;
+
+    public OilPrice(Instant ts, String ss, Double value, String type) {
+        this.ts = ts;
+        this.ss = ss;
         this.value = value;
+        this.type = type;
     }
 
-    public String getDate() {
-        return date;
+    public Instant getTs() {
+        return ts;
+    }
+
+    public String getTsAsString(){
+        return String.valueOf(ts);
     }
 
     public Double getValue() {
         return value;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getSs() {
+        return ss;
     }
 }

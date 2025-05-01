@@ -1,13 +1,12 @@
 package org.example;
+import java.util.ArrayList;
 
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        AlphaVantageProvider oilProvider = new AlphaVantageProvider();
-        oilProvider.provide(Arrays.toString(args));
-
-        SQLiteOilStore dbStore = new SQLiteOilStore();
+        AlphaVantageProvider oilProvider = new AlphaVantageProvider(args[1]);
+        SQLiteOilStore oilStore = new SQLiteOilStore();
+        new Controller(oilProvider, oilStore).run();
 
     }
 }   
