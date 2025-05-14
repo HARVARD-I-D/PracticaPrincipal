@@ -5,7 +5,6 @@ import java.sql.*;
 public class SQLiteNewStore implements NewStore{
     private static final String url = "jdbc:sqlite:news.db";
 
-
     public SQLiteNewStore(){
         try (Connection connection = DriverManager.getConnection(url);
              Statement statement = connection.createStatement()){
