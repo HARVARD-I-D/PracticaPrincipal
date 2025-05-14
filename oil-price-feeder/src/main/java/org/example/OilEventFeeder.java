@@ -31,12 +31,13 @@ public class OilEventFeeder implements OilStore{
         try{
             ObjectMessage message = session.createObjectMessage(oilPrice);
             producer.send(message);
-            System.out.println("Enviado Mensaje: " + message);
+            System.out.println("Enviado Mensaje: " + oilPrice.getTs() + " " + oilPrice.getValue());
         }
         catch (JMSException e){
             e.printStackTrace();
         }
     }
+
     public void close(){
         try{
             producer.close();

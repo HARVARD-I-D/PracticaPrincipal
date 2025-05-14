@@ -12,4 +12,4 @@ public class Main {
         OilEventFeeder oilEventFeeder = new OilEventFeeder();
         new Controller(oilProvider, oilEventFeeder).run();
     }
-}   
+}
