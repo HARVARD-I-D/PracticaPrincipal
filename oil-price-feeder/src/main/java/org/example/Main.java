@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        AlphaVantageProvider oilProvider = new AlphaVantageProvider(args[1]);
+        AlphaVantageProvider oilProvider = new AlphaVantageProvider(args[0]);
+        /*
         SQLiteOilStore oilStore = new SQLiteOilStore();
         new Controller(oilProvider, oilStore).run();
-
+        */
+        OilEventFeeder oilEventFeeder = new OilEventFeeder();
+        new Controller(oilProvider, oilEventFeeder).run();
     }
-}   
+}
