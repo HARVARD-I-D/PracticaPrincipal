@@ -1,10 +1,14 @@
 package org.example;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.sql.Array;
+import java.util.HashMap;
+import java.util.Map;
 
 public class New {
+    JsonObject source;
     String id;
     String name;
     String author;
@@ -17,6 +21,7 @@ public class New {
 
     public New(String title, JsonObject source, String id, String name, String author, String description, String url, String urlToImage, String publishedAt, String content) {
         this.title = title;
+        this.source = source;
         this.id = id;
         this.name = name;
         this.author = author;
@@ -25,6 +30,13 @@ public class New {
         this.urlToImage = urlToImage;
         this.publishedAt = publishedAt;
         this.content = content;
+    }
+
+    public JsonObject getSource() {return source;}
+
+    public Map<String, Object> getSourceAsMap() {
+        Map<String, Object> sourceNew = new Gson().fromJson(getSource(), HashMap.class);
+        return sourceNew;
     }
 
     public String getContent() {return content;}
