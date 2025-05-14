@@ -9,5 +9,7 @@ public class Main {
         SQLiteOilStore oilStore = new SQLiteOilStore();
         new Controller(oilProvider, oilStore).run();
         */
+        OilEventFeeder oilEventFeeder = new OilEventFeeder();
+        new Controller(oilProvider, oilEventFeeder).run();
     }
 }   
