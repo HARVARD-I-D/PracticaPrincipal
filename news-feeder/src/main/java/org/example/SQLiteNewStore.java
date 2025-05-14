@@ -5,16 +5,6 @@ import java.sql.*;
 public class SQLiteNewStore implements NewStore{
     private static final String url = "jdbc:sqlite:news.db";
 
-    /*
-            String[] source;
-        String author;
-        String title;
-        String description;
-        String url;
-        String urlToImage;
-        String publishedAt;
-        String content;
-            */
 
     public SQLiteNewStore(){
         try (Connection connection = DriverManager.getConnection(url);
