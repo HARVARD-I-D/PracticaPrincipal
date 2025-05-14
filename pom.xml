@@ -12,6 +12,8 @@
         <module>news-feeder</module>
         <module>oil-price-feeder</module>
         <module>news-feeder</module>
+        <module>app-subscriber</module>
+        <module>app-subscriber</module>
     </modules>
 
     <properties>

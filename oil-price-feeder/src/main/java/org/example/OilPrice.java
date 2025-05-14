@@ -1,8 +1,9 @@
 package org.example;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public class OilPrice {
+public class OilPrice implements Serializable {
     private final Instant ts;
     private final String ss;
     private final String type;
