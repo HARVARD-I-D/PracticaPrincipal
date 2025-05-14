@@ -1,6 +1,7 @@
 package org.example;
 import jakarta.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.w3c.dom.Text;
 
 public class OilEventFeeder implements OilStore{
     private static final String url = "tcp://localhost:61616";
@@ -29,7 +30,9 @@ public class OilEventFeeder implements OilStore{
     @Override
     public void save(OilPrice oilPrice) {
         try{
-            ObjectMessage message = session.createObjectMessage(oilPrice);
+            String text = "Date:" + oilPrice.getTs() + "," + "Value:" + oilPrice.getValue() + "," +
+                    "Type:" + oilPrice.getType() + "," + "Source:" + oilPrice.getSs();
+            TextMessage message = session.createTextMessage(text);
             producer.send(message);
             System.out.println("Enviado Mensaje: " + oilPrice.getTs() + " " + oilPrice.getValue());
         }
