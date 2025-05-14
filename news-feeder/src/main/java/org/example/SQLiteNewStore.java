@@ -19,8 +19,8 @@ public class SQLiteNewStore implements NewStore{
     public SQLiteNewStore(){
         try (Connection connection = DriverManager.getConnection(url);
              Statement statement = connection.createStatement()){
-            String sql = "CREATE TABLE IF NOT EXISTS news (" + "source" + "author" +
-                    "title" + "description" + "url" +
+            String sql = "CREATE TABLE IF NOT EXISTS news (" + "source" + "id" + "name" +
+                    "author" + "title" + "description" + "url" +
                     "urlToImage" + "publishedAt" + "content";
             statement.execute(sql);
         }
@@ -32,17 +32,18 @@ public class SQLiteNewStore implements NewStore{
 
     @Override
     public void save(New New){
-        String sql = "INSERT INTO news (source, author, title, description, url, urlToImage, publishedAt, content) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO news (source, id, name, author, title, description, url, urlToImage, publishedAt, content) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(url);
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){
-            preparedStatement.setArray(1, New.getSource());
-            preparedStatement.setString(2, New.getAuthor());
-            preparedStatement.setString(3, New.getTitle());
-            preparedStatement.setString(1, New.getDescription());
-            preparedStatement.setString(1, New.getUrl());
-            preparedStatement.setString(1, New.getUrlToImage());
-            preparedStatement.setString(1, New.getPublishedAt());
-            preparedStatement.setString(1, New.getContent());
+            preparedStatement.setString(1, New.getAuthor());
+            preparedStatement.setString(2, New.getTitle());
+            preparedStatement.setString(3, New.getDescription());
+            preparedStatement.setString(4, New.getUrl());
+            preparedStatement.setString(5, New.getUrlToImage());
+            preparedStatement.setString(6, New.getPublishedAt());
+            preparedStatement.setString(7, New.getContent());
+            preparedStatement.setString(8, New.getId());
+            preparedStatement.setString(9, New.getName());
         } catch (SQLException e){
             e.printStackTrace();
         }

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        NewProvider newProvider = new NewsAPIProvider(args[1]);
+        NewProvider newProvider = new NewsAPIProvider(args[0]);
         newProvider.provide();
     }
 }

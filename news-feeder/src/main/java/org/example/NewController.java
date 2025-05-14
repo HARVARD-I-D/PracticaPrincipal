@@ -23,6 +23,6 @@ public class NewController {
             }
         }
     };
-    timer.schedule(task,);
+    //timer.schedule(task,100000);
 
 }

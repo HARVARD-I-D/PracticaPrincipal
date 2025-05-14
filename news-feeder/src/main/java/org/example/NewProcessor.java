@@ -3,8 +3,8 @@ package org.example;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class NewProcessor {
     ArrayList<New> news;
@@ -23,9 +23,11 @@ public class NewProcessor {
             String url =  entry.has("url") ? entry.get("url").getAsString() : null;
             String urlToImage =  entry.has("urlToImage") ? entry.get("urlToImage").getAsString() : null;
             String content =  entry.has("content") ? entry.get("content").getAsString() : null;
-            JsonArray source = entry.has("source") ? entry.get("source").getAsJsonArray() : null;
-            String id = source[0].getAsString();
-            String name = source[1].getAsString();
+            JsonObject source = entry.has("source") ? entry.get("source").getAsJsonObject() : null;
+            assert source != null;
+            String id = source.has("id") ? source.get("id").getAsString() : null;
+            String name = source.has("name") ? source.get("name").getAsString() : null;
+
         }
     }
 

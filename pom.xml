@@ -11,7 +11,6 @@
     <modules>
         <module>news-feeder</module>
         <module>oil-price-feeder</module>
-        <module>news-feeder</module>
     </modules>
 
     <properties>
