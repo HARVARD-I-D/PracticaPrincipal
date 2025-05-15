@@ -28,7 +28,6 @@ public class MultiEventReceiver implements EventReceiver{
                     try{
                         if (message instanceof TextMessage) {
                             String oilMessage = ((TextMessage) message).getText();
-                            System.out.println("Recibido OIL MESSAGE: " + oilMessage);
                         }
                     } catch (JMSException e){
                         e.printStackTrace();

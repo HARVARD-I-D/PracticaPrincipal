@@ -9,6 +9,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/hexagonal/pom.xml" />
         <option value="$PROJECT_DIR$/news/pom.xml" />
       </set>
     </option>
