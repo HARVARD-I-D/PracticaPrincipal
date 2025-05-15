@@ -1,5 +1,6 @@
 package org.example;
+import java.util.ArrayList;
 
 public interface NewProvider {
-    New provide();
+    ArrayList<New> provide();
 }

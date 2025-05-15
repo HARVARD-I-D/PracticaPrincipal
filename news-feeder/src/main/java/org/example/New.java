@@ -1,7 +1,14 @@
 package org.example;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import java.util.HashMap;
+
 public class New {
-    String[] source;
+    JsonObject source;
+    String id;
+    String name;
     String author;
     String title;
     String description;
@@ -10,9 +17,11 @@ public class New {
     String publishedAt;
     String content;
 
-    public New(String title, String[] source, String author, String description, String url, String urlToImage, String publishedAt, String content) {
+    public New(String title, JsonObject source, String id, String name, String author, String description, String url, String urlToImage, String publishedAt, String content) {
         this.title = title;
         this.source = source;
+        this.id = id;
+        this.name = name;
         this.author = author;
         this.description = description;
         this.url = url;
@@ -21,7 +30,11 @@ public class New {
         this.content = content;
     }
 
-    public String[] getSource() {return source;}
+    public JsonObject getSource() {return source;}
+
+    public HashMap getSourceAsMap() {
+        return new Gson().fromJson(getSource(), HashMap.class);
+    }
 
     public String getContent() {return content;}
 
@@ -36,4 +49,8 @@ public class New {
     public String getPublishedAt() {return publishedAt;}
 
     public String getUrlToImage() {return urlToImage;}
+
+    public String getId() {return id;}
+
+    public String getName() {return name;}
 }
