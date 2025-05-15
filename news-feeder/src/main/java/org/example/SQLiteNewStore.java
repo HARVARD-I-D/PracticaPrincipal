@@ -36,6 +36,7 @@ public class SQLiteNewStore implements NewStore{
             preparedStatement.setString(8, New.getUrlToImage());
             preparedStatement.setString(9, New.getPublishedAt());
             preparedStatement.setString(10, New.getContent());
+            preparedStatement.execute();
         } catch (SQLException e){
             e.printStackTrace();
         }

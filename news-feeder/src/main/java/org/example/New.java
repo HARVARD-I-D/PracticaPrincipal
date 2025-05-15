@@ -3,9 +3,7 @@ package org.example;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import java.sql.Array;
 import java.util.HashMap;
-import java.util.Map;
 
 public class New {
     JsonObject source;
@@ -34,9 +32,8 @@ public class New {
 
     public JsonObject getSource() {return source;}
 
-    public Map<String, Object> getSourceAsMap() {
-        Map<String, Object> sourceNew = new Gson().fromJson(getSource(), HashMap.class);
-        return sourceNew;
+    public HashMap getSourceAsMap() {
+        return new Gson().fromJson(getSource(), HashMap.class);
     }
 
     public String getContent() {return content;}

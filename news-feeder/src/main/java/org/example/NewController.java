@@ -13,6 +13,7 @@ public class NewController {
         this.newStore = newStore;
     }
 
+    /*
     Timer timer = new Timer();
     TimerTask task = new TimerTask() {
         @Override
@@ -23,6 +24,13 @@ public class NewController {
             }
         }
     };
-    //timer.schedule(task,100000);
+    timer.schedule(task,100000);
 
+     */
+    public void run() {
+        List<New> news = newProvider.provide();
+        for (New aNew : news){
+            newStore.save(aNew);
+        }
+    }
 }

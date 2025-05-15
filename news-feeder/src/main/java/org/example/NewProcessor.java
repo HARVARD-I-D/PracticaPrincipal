@@ -4,8 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 
 public class NewProcessor {
     ArrayList<New> news;
@@ -28,7 +26,7 @@ public class NewProcessor {
             assert source != null;
             String id = source.has("id") ? source.get("id").getAsString() : null;
             String name = source.has("name") ? source.get("name").getAsString() : null;
-
+            news.add(new New(title, source, id, name, author, description, url, urlToImage, date,content));
         }
     }
 
