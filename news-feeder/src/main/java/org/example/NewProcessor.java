@@ -12,7 +12,6 @@ public class NewProcessor {
         this.news = new ArrayList<>();
 
 
-
         for (int i = 0; i < articles.size(); i++){
             JsonObject entry = articles.get(i).getAsJsonObject();
             String date =  entry.has("publishedAt") ? entry.get("publishedAt").getAsString() : null;

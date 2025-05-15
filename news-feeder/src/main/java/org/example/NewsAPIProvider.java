@@ -11,7 +11,6 @@ public class NewsAPIProvider implements NewProvider {
     private final String url;
 
 
-
     public NewsAPIProvider(String apiKey) {
         url = "https://newsapi.org/v2/everything?q=oil&sortBy=popularity&apiKey=" + apiKey;
     }
