@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class NewProcessor {
     ArrayList<New> news;
 
-    public void Processor(JsonArray data){
+    public void Processor(JsonArray articles){
         this.news = new ArrayList<>();
 
 
 
-        for (int i = 0; i < data.size(); i++){
-            JsonObject entry = data.get(i).getAsJsonObject();
+        for (int i = 0; i < articles.size(); i++){
+            JsonObject entry = articles.get(i).getAsJsonObject();
             String date =  entry.has("publishedAt") ? entry.get("publishedAt").getAsString() : null;
             String author =  entry.has("author") ? entry.get("author").getAsString() : null;
             String title =  entry.has("title") ? entry.get("title").getAsString() : null;

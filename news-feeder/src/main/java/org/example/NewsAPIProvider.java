@@ -29,10 +29,10 @@ public class NewsAPIProvider implements NewProvider {
             String jsonResponse = response.body();
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(jsonResponse, JsonObject.class);
-            if(jsonObject.has("data")){
-                JsonArray data = jsonObject.get("data").getAsJsonArray();
+            if(jsonObject.has("articles")){
+                JsonArray articles = jsonObject.get("articles").getAsJsonArray();
                 NewProcessor newProcessor = new NewProcessor();
-                newProcessor.Processor(data);
+                newProcessor.Processor(articles);
                 news.addAll(newProcessor.getNews());
             }
         } catch (Exception e){
