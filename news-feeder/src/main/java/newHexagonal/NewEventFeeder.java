@@ -1,9 +1,7 @@
-/*
-package org.example;
+/*package newHexagonal;
 import jakarta.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.eclipse.jetty.server.ConnectionFactory;
-import org.w3c.dom.Text;
 import spark.Session;
 import java.sql.Connection;
 
@@ -29,4 +27,4 @@ public class NewEventFeeder implements NewStore{
 
     }
 }
-*/
+ */
