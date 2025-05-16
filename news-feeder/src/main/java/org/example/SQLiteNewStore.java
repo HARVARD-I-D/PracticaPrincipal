@@ -21,7 +21,6 @@ public class SQLiteNewStore implements NewStore{
                     "date TEXT,\n" +
                     "content TEXT)";
             statement.execute(sql);
-            //statement.execute("DROP TABLE news");
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -34,7 +33,7 @@ public class SQLiteNewStore implements NewStore{
         String sql = "INSERT INTO news (source, idsource, name, author, title, description, url, urlToImage, date, content) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(url);
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){
-            preparedStatement.setString(1, New.getSourceAsMap().toString());
+            preparedStatement.setString(1, New.getSourceAsString());
             preparedStatement.setString(2, New.getId());
             preparedStatement.setString(3, New.getName());
             preparedStatement.setString(4, New.getAuthor());
