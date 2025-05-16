@@ -1,5 +1,6 @@
 package subscriberHexagonal.adapter.out;
 
+import subscriberHexagonal.domain.model.NewsEvent;
 import subscriberHexagonal.domain.port.out.EventStore;
 import subscriberHexagonal.domain.model.OilEvent;
 import subscriberHexagonal.domain.model.OilEventParser;
@@ -38,22 +39,21 @@ public class MultiEventStore implements EventStore {
     }
 
     @Override
-    public void storeOil(String oilPriceRaw) {
-        OilEvent event = OilEventParser.parse(oilPriceRaw);
+    public void storeOil(OilEvent oilEvent) {
         String sql = "INSERT INTO oil_prices (value, date, type) VALUES (?, ?, ?)";
 
         try(Connection conn = DriverManager.getConnection(url);
             PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setDouble(1, event.getValue());
-            pstmt.setString(2, event.getTsAsString());
-            pstmt.setString(3, event.getType());
+            pstmt.setDouble(1, oilEvent.getValue());
+            pstmt.setString(2, oilEvent.getTsAsString());
+            pstmt.setString(3, oilEvent.getType());
         } catch (SQLException e){
             e.printStackTrace();
         }
     }
 
     @Override
-    public void storeNews(String newsRaw) {
+    public void storeNews(NewsEvent newsEvent) {
 
     }
 }

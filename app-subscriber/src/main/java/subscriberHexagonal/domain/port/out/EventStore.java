@@ -1,6 +1,9 @@
 package subscriberHexagonal.domain.port.out;
 
+import subscriberHexagonal.domain.model.NewsEvent;
+import subscriberHexagonal.domain.model.OilEvent;
+
 public interface EventStore {
-    void storeOil(String oilPriceRaw);
-    void storeNews(String newsRaw);
+    void storeOil(OilEvent oilEvent);
+    void storeNews(NewsEvent newsEvent);
 }

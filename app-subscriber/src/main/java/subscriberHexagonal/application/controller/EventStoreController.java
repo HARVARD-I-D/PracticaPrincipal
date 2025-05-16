@@ -1,21 +1,20 @@
 package subscriberHexagonal.application.controller;
 
-import subscriberHexagonal.adapter.in.jms.MultiEventReceiver;
-import subscriberHexagonal.adapter.out.MultiEventStore;
-
+import subscriberHexagonal.domain.port.in.EventHandler;
+import subscriberHexagonal.domain.port.out.EventStore;
 import java.util.List;
 
 public class EventStoreController {
-    private final MultiEventReceiver eventReceiver;
-    private final MultiEventStore eventStore;
+    private final EventHandler eventHandler;
+    private final EventStore eventStore;
 
-    public EventStoreController(MultiEventReceiver eventReceiver, MultiEventStore eventStore){
-        this.eventReceiver = eventReceiver;
+    public EventStoreController(EventHandler eventReceiver, EventStore eventStore){
+        this.eventHandler = eventReceiver;
         this.eventStore = eventStore;
     }
 
     public void run(){
-        eventReceiver.start();
+        eventHandler.start();
     }
 
 }

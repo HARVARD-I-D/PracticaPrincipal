@@ -3,9 +3,10 @@ package subscriberHexagonal.adapter.in.jms;
 import jakarta.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
+import subscriberHexagonal.adapter.out.EventProcessor;
 import subscriberHexagonal.domain.port.in.EventHandler;
 
-public class MultiEventReceiver implements EventHandler {
+public class MultiEventHandler implements EventHandler {
     private static final String url = "tcp://localhost:61616";
     private static String OIL_QUEUE = "OIL_QUEUE";
     private static String NEWS_QUEUE = "NEWS_QUEUE";
@@ -21,6 +22,7 @@ public class MultiEventReceiver implements EventHandler {
             connection.start();
 
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            EventProcessor processor = new EventProcessor();
 
             //OIL_QUEUE
             Destination oilQueue = session.createQueue(OIL_QUEUE);
@@ -31,6 +33,7 @@ public class MultiEventReceiver implements EventHandler {
                     try{
                         if (message instanceof TextMessage) {
                             String oilMessage = ((TextMessage) message).getText();
+                            processor.OilProccessor(oilMessage);
                         }
                     } catch (JMSException e){
                         e.printStackTrace();
@@ -46,14 +49,5 @@ public class MultiEventReceiver implements EventHandler {
         }
     }
 
-    @Override
-    public void stop(){
-        try{
-            if(session != null) session.close();
-            if(connection != null) connection.close();
-        } catch (JMSException e){
-            e.printStackTrace();
-        }
-    }
 
 }

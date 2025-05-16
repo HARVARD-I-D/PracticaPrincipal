@@ -1,16 +1,15 @@
 package subscriberHexagonal;
 
 
-import subscriberHexagonal.adapter.in.jms.MultiEventReceiver;
+import subscriberHexagonal.adapter.in.jms.MultiEventHandler;
 import subscriberHexagonal.adapter.out.MultiEventStore;
 import subscriberHexagonal.application.controller.EventStoreController;
-import subscriberHexagonal.application.service.BrokerEventService;
 
 public class Main {
     public static void main(String[] args){
-        MultiEventReceiver receiver = new MultiEventReceiver();
+        MultiEventHandler handler = new MultiEventHandler();
         MultiEventStore store = new MultiEventStore();
-        EventStoreController eventStore = new EventStoreController(receiver, store);
+        EventStoreController eventStore = new EventStoreController(handler, store);
 
         eventStore.run();
     }

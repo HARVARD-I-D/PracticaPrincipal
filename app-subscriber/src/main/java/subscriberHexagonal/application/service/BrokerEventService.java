@@ -1,5 +1,8 @@
 package subscriberHexagonal.application.service;
 
-public class BrokerEventService{
-    //TODO Clase que conecta la unidad de negocio con el broker en tiempo real
+public class BrokerEventService {
+    private static final String url = "tcp://localhost:61616";
+    private static final String OIL_QUEUE = "OIL_QUEUE";
+
+    //TODO Implementar conexión con broker que obtenga los eventos recientes en tiempo real.
 }
