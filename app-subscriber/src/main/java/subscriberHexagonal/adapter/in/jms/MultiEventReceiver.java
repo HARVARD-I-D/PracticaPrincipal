@@ -1,8 +1,11 @@
-package org.example;
+package subscriberHexagonal.adapter.in.jms;
+
 import jakarta.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
-public class MultiEventReceiver implements EventReceiver{
+import subscriberHexagonal.domain.port.in.EventHandler;
+
+public class MultiEventReceiver implements EventHandler {
     private static final String url = "tcp://localhost:61616";
     private static String OIL_QUEUE = "OIL_QUEUE";
     private static String NEWS_QUEUE = "NEWS_QUEUE";
