@@ -1,9 +1,7 @@
 package org.example;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import java.util.HashMap;
 
 public class New {
     private final JsonObject source;
@@ -32,8 +30,12 @@ public class New {
 
     public JsonObject getSource() {return source;}
 
-    public HashMap getSourceAsMap() {
-        return new Gson().fromJson(getSource(), HashMap.class);
+    public String getSourceAsString() {
+        String sourceStr = "unknown";
+        if (!getSource().isJsonNull()) {
+            sourceStr = getSource().toString();
+        }
+        return sourceStr;
     }
 
     public String getContent() {return content;}

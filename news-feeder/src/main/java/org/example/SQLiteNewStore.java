@@ -9,10 +9,17 @@ public class SQLiteNewStore implements NewStore{
         try (Connection connection = DriverManager.getConnection(url);
              Statement statement = connection.createStatement()){
             String sql = "CREATE TABLE IF NOT EXISTS news (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "source TEXT" + "id TEXT" + "name TEXT" +
-                    "author TEXT" + "title TEXT" + "description TEXT" + "url TEXT" +
-                    "urlToImage TEXT" + "publishedAt TEXT" + "content TEXT)";
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                    "source TEXT,\n" +
+                    "idsource TEXT,\n" +
+                    "name TEXT,\n" +
+                    "author TEXT,\n" +
+                    "title TEXT,\n" +
+                    "description TEXT,\n" +
+                    "url TEXT,\n" +
+                    "urlToImage TEXT,\n" +
+                    "date TEXT,\n" +
+                    "content TEXT)";
             statement.execute(sql);
         }
         catch (SQLException e){
@@ -23,10 +30,10 @@ public class SQLiteNewStore implements NewStore{
 
     @Override
     public void save(New New){
-        String sql = "INSERT INTO news (source, id, name, author, title, description, url, urlToImage, publishedAt, content) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO news (source, idsource, name, author, title, description, url, urlToImage, date, content) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(url);
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){
-            preparedStatement.setString(1, New.getSourceAsMap().toString());
+            preparedStatement.setString(1, New.getSourceAsString());
             preparedStatement.setString(2, New.getId());
             preparedStatement.setString(3, New.getName());
             preparedStatement.setString(4, New.getAuthor());
