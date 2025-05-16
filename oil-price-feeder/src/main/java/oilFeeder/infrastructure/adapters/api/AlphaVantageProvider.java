@@ -60,7 +60,6 @@ public class AlphaVantageProvider implements OilProvider {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return prices;
     }
 }

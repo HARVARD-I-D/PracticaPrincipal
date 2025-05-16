@@ -28,12 +28,13 @@ public class MultiEventHandler implements EventHandler {
             ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
             connection = connectionFactory.createConnection();
             connection.setClientID("oil-event-subscriber");
+            connection.start();
 
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             EventProcessor processor = new EventProcessor();
 
             Topic oilTopic = session.createTopic(OIL_PRICE);
-            MessageConsumer oilConsumer = session.createDurableSubscriber(oilTopic, OIL_SUBSCRIPTION_NAME);
+            TopicSubscriber oilConsumer = session.createDurableSubscriber(oilTopic, OIL_SUBSCRIPTION_NAME);
             oilConsumer.setMessageListener(message -> {
                 try{
                     if (message instanceof TextMessage) {
@@ -47,7 +48,6 @@ public class MultiEventHandler implements EventHandler {
                     e.printStackTrace();
                 }
             });
-            connection.start();
 
             //TODO NEWS_QUEUE SEGÚN ESTRUCTURA DEL EVENTO
 
@@ -70,6 +70,4 @@ public class MultiEventHandler implements EventHandler {
             return new ArrayList<>(newsEvents);
         }
     }
-
-
 }

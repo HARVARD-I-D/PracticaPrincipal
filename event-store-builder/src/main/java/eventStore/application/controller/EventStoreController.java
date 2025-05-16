@@ -18,7 +18,7 @@ public class EventStoreController {
     public void run(){
         eventHandler.start();
         try {
-            Thread.sleep(5000); // Espera 5 segundos a que lleguen mensajes
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

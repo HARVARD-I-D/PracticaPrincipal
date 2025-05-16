@@ -13,7 +13,7 @@
         <module>oil-price-feeder</module>
         <module>news-feeder</module>
         <module>event-store-builder</module>
-        <module>app-subscriber</module>
+        <module>business-unit</module>
     </modules>
 
     <properties>
