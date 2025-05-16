@@ -23,10 +23,7 @@ public class NewProcessor {
             String content = entry.has("content") ? entry.get("content").getAsString() : null;
             JsonObject source = entry.has("source") ? entry.get("source").getAsJsonObject() : null;
             assert source != null;
-            String idsource = source.has("id") ? source.get("id").getAsString() : null;
-            if (idsource == null) {
-                idsource = "unknown";
-            }
+            String idsource = source.has("id") ? source.get("id").getAsString() : "unknown";
             String name = source.has("name") ? source.get("name").getAsString() : null;
             news.add(new New(title, source, idsource, name, author, description, url, urlToImage, date, content));
         }

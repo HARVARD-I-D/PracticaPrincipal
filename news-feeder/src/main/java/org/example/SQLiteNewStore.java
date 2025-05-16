@@ -9,18 +9,19 @@ public class SQLiteNewStore implements NewStore{
         try (Connection connection = DriverManager.getConnection(url);
              Statement statement = connection.createStatement()){
             String sql = "CREATE TABLE IF NOT EXISTS news (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "source TEXT, " +
-                    "idsource TEXT, " +
-                    "name TEXT, " +
-                    "author TEXT, " +
-                    "title TEXT, " +
-                    "description TEXT, " +
-                    "url TEXT, " +
-                    "urlToImage TEXT, " +
-                    "date TEXT, " +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                    "source TEXT,\n" +
+                    "idsource TEXT,\n" +
+                    "name TEXT,\n" +
+                    "author TEXT,\n" +
+                    "title TEXT,\n" +
+                    "description TEXT,\n" +
+                    "url TEXT,\n" +
+                    "urlToImage TEXT,\n" +
+                    "date TEXT,\n" +
                     "content TEXT)";
             statement.execute(sql);
+            //statement.execute("DROP TABLE news");
         }
         catch (SQLException e){
             e.printStackTrace();
