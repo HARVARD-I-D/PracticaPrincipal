@@ -13,7 +13,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 public class MultiEventStore implements EventStore {
-    private static final String BASE_DIR = "eventstore";
+    private static final String BASE_DIR = Paths.get(System.getProperty("user.dir")).getParent().resolve("eventstore").toString();
     private static final String TOPIC_OIL = "OIL_PRICE";
     private static final String SS_DIR_OIL = "AlphaVantage";
 
