@@ -22,7 +22,7 @@ public class OilEventFeeder implements OilStore {
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
             Destination destination = session.createTopic(subject);
             producer = session.createProducer(destination);
-            producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+            producer.setDeliveryMode(DeliveryMode.PERSISTENT);
         }
         catch (JMSException e){
             e.printStackTrace();

@@ -28,6 +28,7 @@ public class AlphaVantageProvider implements OilProvider {
                     .execute();
 
             String jsonResponse = response.body();
+            System.out.println("Respuesta WTI: " + jsonResponse);
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(jsonResponse, JsonObject.class);
             if (jsonObject.has("data")) {
@@ -47,6 +48,7 @@ public class AlphaVantageProvider implements OilProvider {
                     .execute();
 
             String jsonResponse = response.body();
+            System.out.println("Respuesta Brent: " + jsonResponse);
             Gson gson = new Gson();
             JsonObject jsonObject = gson.fromJson(jsonResponse, JsonObject.class);
             if (jsonObject.has("data")) {

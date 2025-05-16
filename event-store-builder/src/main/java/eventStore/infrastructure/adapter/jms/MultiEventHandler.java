@@ -48,6 +48,7 @@ public class MultiEventHandler implements EventHandler {
                 }
             });
             connection.start();
+
             //TODO NEWS_QUEUE SEGÚN ESTRUCTURA DEL EVENTO
 
 

@@ -23,9 +23,6 @@ public class EventProcessor {
                 fields.put(key, value);
             }
         }
-
-        System.out.println("DEBUG - Mensaje recibido: " + oilRawMessage);
-
         try {
             String dateStr = fields.get("date");
             String valueStr = fields.get("value");

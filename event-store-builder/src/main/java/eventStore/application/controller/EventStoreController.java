@@ -17,9 +17,14 @@ public class EventStoreController {
 
     public void run(){
         eventHandler.start();
+        try {
+            Thread.sleep(5000); // Espera 5 segundos a que lleguen mensajes
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         ArrayList<OilEvent> oilEvents = eventHandler.handleOil();
         for (OilEvent oilEvent : oilEvents){
-            System.out.println(oilEvent.getValue());
+            eventStore.storeOil(oilEvent);
         }
     }
 }
