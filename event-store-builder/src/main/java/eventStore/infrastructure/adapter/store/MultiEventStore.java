@@ -8,7 +8,6 @@ public class MultiEventStore implements EventStore {
     private static final String url = "jdbc:sqlite:events.db";
     //TODO Guardar Eventos en Ficheros
 
-
     @Override
     public void storeOil(OilEvent oilEvent) {
 

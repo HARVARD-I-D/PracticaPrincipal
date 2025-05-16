@@ -15,26 +15,39 @@ public class EventProcessor {
         Map<String, String> fields = new HashMap<>();
 
         String[] pairs = oilRawMessage.split(",");
-        for(String pair : pairs){
-            String[] keyValue = pair.split(":");
-            if (keyValue.length == 2){
-                fields.put(keyValue[0].trim(), keyValue[1].trim());
+        for (String pair : pairs) {
+            String[] keyValue = pair.split(":", 2);
+            if (keyValue.length == 2) {
+                String key = keyValue[0].trim().toLowerCase();
+                String value = keyValue[1].trim();
+                fields.put(key, value);
             }
         }
 
+        System.out.println("DEBUG - Mensaje recibido: " + oilRawMessage);
+
         try {
-            Instant date = Instant.parse(fields.get("Date") + "T00:00:00Z");
-            double value = Double.parseDouble(fields.get("Value"));
-            String type = fields.get("Type");
-            String source = fields.get("Source");
+            String dateStr = fields.get("date");
+            String valueStr = fields.get("value");
+            String type = fields.getOrDefault("type", "Unknown");
+            String source = fields.getOrDefault("source", "Unknown");
+
+            if (dateStr == null || valueStr == null) {
+                System.err.println("ERROR: Falta campo obligatorio (date o value). Mensaje: " + oilRawMessage);
+                return;
+            }
+
+            Instant date = Instant.parse(dateStr);
+            double value = Double.parseDouble(valueStr);
 
             OilEvent event = new OilEvent(date, value, type, source);
             oilEvents.add(event);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error al parsear el mensaje: " + oilRawMessage);
             e.printStackTrace();
         }
     }
+
 
     public ArrayList<OilEvent> getParsedOilEvents() {return oilEvents;}
 }
