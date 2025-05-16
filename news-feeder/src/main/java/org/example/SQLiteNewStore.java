@@ -10,9 +10,9 @@ public class SQLiteNewStore implements NewStore{
              Statement statement = connection.createStatement()){
             String sql = "CREATE TABLE IF NOT EXISTS news (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "source TEXT" + "id TEXT" + "name TEXT" +
-                    "author TEXT" + "title TEXT" + "description TEXT" + "url TEXT" +
-                    "urlToImage TEXT" + "publishedAt TEXT" + "content TEXT)";
+                    "source TEXT, " + "id TEXT, " + "name TEXT, " +
+                    "author TEXT, " + "title TEXT, " + "description TEXT, " + "url TEXT, " +
+                    "urlToImage TEXT, " + "publishedAt TEXT, " + "content TEXT)";
             statement.execute(sql);
         }
         catch (SQLException e){
