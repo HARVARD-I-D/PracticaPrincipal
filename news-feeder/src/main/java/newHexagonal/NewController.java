@@ -1,8 +1,6 @@
-package org.example;
+package newHexagonal;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class NewController {
     private final NewProvider newProvider;

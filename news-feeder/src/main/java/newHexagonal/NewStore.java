@@ -1,4 +1,4 @@
-package org.example;
+package newHexagonal;
 
 public interface NewStore {
     void save(New New);

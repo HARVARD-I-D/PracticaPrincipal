@@ -1,4 +1,5 @@
-package org.example;
+package newHexagonal;
+
 import java.util.ArrayList;
 
 public interface NewProvider {
