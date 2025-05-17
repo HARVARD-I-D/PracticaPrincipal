@@ -1,4 +1,6 @@
-package newHexagonal;
+package newsFeeder.infrastructure.port;
+
+import newsFeeder.application.domain.New;
 
 import java.util.ArrayList;
 

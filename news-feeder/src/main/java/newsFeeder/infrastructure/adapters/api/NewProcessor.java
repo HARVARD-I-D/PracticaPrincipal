@@ -1,7 +1,8 @@
-package newHexagonal;
+package newsFeeder.infrastructure.adapters.api;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import newsFeeder.application.domain.New;
 
 import java.util.ArrayList;
 

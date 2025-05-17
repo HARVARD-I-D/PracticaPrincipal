@@ -1,5 +1,10 @@
-package newHexagonal;
+package newsFeeder;
 
+
+import newsFeeder.application.controller.NewController;
+import newsFeeder.infrastructure.adapters.api.NewsAPIProvider;
+import newsFeeder.infrastructure.adapters.jms.NewEventFeeder;
+import newsFeeder.infrastructure.port.NewProvider;
 
 public class Main {
     public static void main(String[] args) {

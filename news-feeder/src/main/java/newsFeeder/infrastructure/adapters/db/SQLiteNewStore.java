@@ -1,4 +1,7 @@
-package newHexagonal;
+package newsFeeder.infrastructure.adapters.db;
+
+import newsFeeder.application.domain.New;
+import newsFeeder.infrastructure.port.NewStore;
 
 import java.sql.*;
 

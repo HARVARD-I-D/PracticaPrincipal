@@ -1,4 +1,4 @@
-package newHexagonal;
+package newsFeeder.application.domain;
 
 import com.google.gson.JsonObject;
 

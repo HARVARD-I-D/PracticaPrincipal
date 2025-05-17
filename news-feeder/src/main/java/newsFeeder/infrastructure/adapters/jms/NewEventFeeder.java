@@ -1,9 +1,11 @@
-package newHexagonal;
+package newsFeeder.infrastructure.adapters.jms;
 import jakarta.jms.*;
+import newsFeeder.application.domain.New;
+import newsFeeder.infrastructure.port.NewStore;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 
-public class NewEventFeeder implements NewStore{
+public class NewEventFeeder implements NewStore {
     private static final String url = "tcp://localhost:61616";
     private static String subject = "NEW_QUEUE";
 

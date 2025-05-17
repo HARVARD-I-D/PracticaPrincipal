@@ -1,4 +1,8 @@
-package newHexagonal;
+package newsFeeder.application.controller;
+
+import newsFeeder.infrastructure.port.NewProvider;
+import newsFeeder.infrastructure.port.NewStore;
+import newsFeeder.application.domain.New;
 
 import java.util.List;
 import java.util.Timer;
