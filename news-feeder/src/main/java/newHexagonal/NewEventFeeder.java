@@ -1,9 +1,7 @@
-/*package newHexagonal;
+package newHexagonal;
 import jakarta.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.eclipse.jetty.server.ConnectionFactory;
-import spark.Session;
-import java.sql.Connection;
+
 
 public class NewEventFeeder implements NewStore{
     private static final String url = "tcp://localhost:61616";
@@ -16,15 +14,43 @@ public class NewEventFeeder implements NewStore{
     public NewEventFeeder(){
         try{
             ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
+            connection = connectionFactory.createConnection();
+            connection.start();
 
-        } catch(){
+            session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            Destination destination = session.createTopic(subject);
+            messageProducer = session.createProducer(destination);
+            messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT);
 
+        } catch(JMSException e){
+            e.printStackTrace();
         }
     }
 
     @Override
     public void save(New New) {
+        try{
+            String text = "Date" + New.getPublishedAt() + "Author" + New.getAuthor() + "Title" + New.getTitle() +
+                    "Description" + New.getDescription() + "Url" + New.getUrl() + "Url To Image" + New.getUrlToImage() +
+                    "Content:" + New.getContent() + "Source: " + New.getSourceAsString() + "Id: " + New.getId() +
+                    "Name: " + New.getName();
+            TextMessage textMessage = session.createTextMessage(text);
+            messageProducer.send(textMessage);
+            System.out.println("Enviado Mensaje: " + New.getPublishedAt() + " " + New.getTitle());
+        }
+        catch (JMSException e){
+            e.printStackTrace();
+        }
+    }
 
+    public void close(){
+        try {
+            messageProducer.close();
+            session.close();
+            connection.close();
+        }
+        catch (JMSException e){
+            e.printStackTrace();
+        }
     }
 }
- */
