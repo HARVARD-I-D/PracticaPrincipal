@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class EventProcessor {
+public class OilEventProcessor {
     ArrayList<OilEvent> oilEvents;
 
     public void OilProccessor(String oilRawMessage) {
@@ -44,7 +44,6 @@ public class EventProcessor {
             e.printStackTrace();
         }
     }
-
 
     public ArrayList<OilEvent> getParsedOilEvents() {return oilEvents;}
 }

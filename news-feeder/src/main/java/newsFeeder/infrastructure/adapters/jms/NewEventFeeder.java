@@ -1,4 +1,5 @@
 package newsFeeder.infrastructure.adapters.jms;
+import com.google.gson.Gson;
 import jakarta.jms.*;
 import newsFeeder.application.domain.New;
 import newsFeeder.infrastructure.port.NewStore;
@@ -7,7 +8,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 
 public class NewEventFeeder implements NewStore {
     private static final String url = "tcp://localhost:61616";
-    private static String subject = "NEW_QUEUE";
+    private static String subject = "NEWS_FEED";
 
     private Connection connection;
     private Session session;
@@ -30,20 +31,18 @@ public class NewEventFeeder implements NewStore {
     }
 
     @Override
-    public void save(New New) {
-        try{
-            String text = "Date" + New.getPublishedAt() + "Author" + New.getAuthor() + "Title" + New.getTitle() +
-                    "Description" + New.getDescription() + "Url" + New.getUrl() + "Url To Image" + New.getUrlToImage() +
-                    "Content:" + New.getContent() + "Source: " + New.getSourceAsString() + "Id: " + New.getId() +
-                    "Name: " + New.getName();
-            TextMessage textMessage = session.createTextMessage(text);
+    public void save(New news) {
+        try {
+            Gson gson = new Gson();
+            String json = gson.toJson(news);
+            TextMessage textMessage = session.createTextMessage(json);
             messageProducer.send(textMessage);
-            System.out.println("Enviado Mensaje: " + New.getPublishedAt() + " " + New.getTitle());
-        }
-        catch (JMSException e){
+            System.out.println("Enviado Mensaje: " + news.getPublishedAt() + " " + news.getTitle());
+        } catch (JMSException e) {
             e.printStackTrace();
         }
     }
+
 
     public void close(){
         try {

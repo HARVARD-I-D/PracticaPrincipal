@@ -1,5 +1,6 @@
 package eventStore.infrastructure.adapter.jms;
 
+import com.google.gson.Gson;
 import jakarta.jms.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -7,7 +8,6 @@ import eventStore.application.domain.model.NewsEvent;
 import eventStore.application.domain.model.OilEvent;
 import eventStore.infrastructure.port.EventHandler;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MultiEventHandler implements EventHandler {
@@ -22,17 +22,18 @@ public class MultiEventHandler implements EventHandler {
     private final ArrayList<NewsEvent> newsEvents = new ArrayList<>();
 
     private static final String OIL_SUBSCRIPTION_NAME = "OilPriceSubscription";
+    private static final String NEWS_SUBSCRIPTION_NAME = "NewsFeedSubscription";
 
     @Override
     public void start(){
         try{
             ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
             connection = connectionFactory.createConnection();
-            connection.setClientID("oil-event-subscriber");
+            connection.setClientID("event-subscriber");
             connection.start();
 
             session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            EventProcessor processor = new EventProcessor();
+            OilEventProcessor processor = new OilEventProcessor();
 
             Topic oilTopic = session.createTopic(OIL_PRICE);
             TopicSubscriber oilConsumer = session.createDurableSubscriber(oilTopic, OIL_SUBSCRIPTION_NAME);
@@ -40,7 +41,7 @@ public class MultiEventHandler implements EventHandler {
                 try{
                     if (message instanceof TextMessage) {
                         String oilMessage = ((TextMessage) message).getText();
-                        System.out.println("Mensaje recibido de JMS: " + oilMessage);
+                        System.out.println("Mensaje de petróleo recibido: " + oilMessage);
                         processor.OilProccessor(oilMessage);
                         synchronized (oilEvents) {
                             oilEvents.addAll(processor.getParsedOilEvents());
@@ -51,8 +52,25 @@ public class MultiEventHandler implements EventHandler {
                 }
             });
 
-            //TODO NEWS_QUEUE SEGÚN ESTRUCTURA DEL EVENTO
+            Topic newsTopic = session.createTopic(NEWS_FEED);
+            MessageConsumer newsConsumer = session.createDurableSubscriber(newsTopic, NEWS_SUBSCRIPTION_NAME);
+            newsConsumer.setMessageListener(message -> {
+                try {
+                    if (message instanceof TextMessage) {
+                        String json = ((TextMessage) message).getText();
+                        Gson gson = new Gson();
+                        NewsEvent newsEvent = gson.fromJson(json, NewsEvent.class);
 
+                        synchronized (newsEvents) {
+                            newsEvents.add(newsEvent);
+                        }
+
+                        System.out.println("Mensaje de noticia recibido: " + newsEvent.getPublishedAt() + " - " + newsEvent.getTitle());
+                    }
+                } catch (JMSException e) {
+                    e.printStackTrace();
+                }
+            });
 
         } catch (JMSException e){
             e.printStackTrace();
@@ -71,7 +89,9 @@ public class MultiEventHandler implements EventHandler {
     @Override
     public ArrayList<NewsEvent> handleNews(){
         synchronized (newsEvents) {
-            return new ArrayList<>(newsEvents);
+            ArrayList<NewsEvent> result = new ArrayList<>(newsEvents);
+            newsEvents.clear();
+            return result;
         }
     }
 }

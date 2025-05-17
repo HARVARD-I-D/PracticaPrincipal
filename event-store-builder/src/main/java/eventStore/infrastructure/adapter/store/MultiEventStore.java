@@ -27,13 +27,13 @@ public class MultiEventStore implements EventStore {
         String fileName = dateStr + ".events";
 
         File dir = Paths.get(BASE_DIR, TOPIC_OIL, SS_DIR_OIL).toFile();
-        if(!dir.exists()) {
+        if (!dir.exists()) {
             dir.mkdirs();
         }
 
         File file = new File(dir, fileName);
 
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             String line = String.format("%s,%s,%s,%s",
                     oilEvent.getTsAsString(),
                     Double.toString(oilEvent.getValue()),
@@ -42,13 +42,40 @@ public class MultiEventStore implements EventStore {
 
             writer.write(line);
             writer.newLine();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.err.println("Error al escribir evento en archivo: " + file.getAbsolutePath());
             e.printStackTrace();
         }
     }
+
     @Override
     public void storeNews(NewsEvent newsEvent) {
+        String dateStr = newsEvent.getPublishedAt().substring(0, 10).replace("-", ""); // yyyyMMdd
+        String fileName = dateStr + ".events";
 
+        String topic = "NEWS_FEED";
+        String ssDir = "NewsAPI";
+
+        File dir = Paths.get(BASE_DIR, topic, ssDir).toFile();
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        File file = new File(dir, fileName);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            String line = String.format("%s|%s|%s|%s|%s",
+                    newsEvent.getPublishedAt(),
+                    newsEvent.getTitle().replaceAll("\\|", " "),
+                    newsEvent.getAuthor(),
+                    newsEvent.getSourceAsMap().get("name"),
+                    newsEvent.getUrl());
+
+            writer.write(line);
+            writer.newLine();
+        } catch (IOException e) {
+            System.err.println("Error al escribir evento de noticia en archivo: " + file.getAbsolutePath());
+            e.printStackTrace();
+        }
     }
 }

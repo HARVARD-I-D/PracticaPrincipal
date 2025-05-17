@@ -1,10 +1,9 @@
 package eventStore.application.controller;
 
+import eventStore.application.domain.model.NewsEvent;
 import eventStore.application.domain.model.OilEvent;
 import eventStore.infrastructure.port.EventHandler;
 import eventStore.infrastructure.port.EventStore;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class EventStoreController {
@@ -24,8 +23,16 @@ public class EventStoreController {
             ArrayList<OilEvent> oilEvents = eventHandler.handleOil();
             if (!oilEvents.isEmpty()) {
                 for (OilEvent oilEvent : oilEvents) {
-                    System.out.println("Almacenando Evento: " + oilEvent.getTsAsString());
+                    System.out.println("Almacenando Evento OIL: " + oilEvent.getTsAsString());
                     eventStore.storeOil(oilEvent);
+                }
+            }
+
+            ArrayList<NewsEvent> newsEvents = eventHandler.handleNews();
+            if (!newsEvents.isEmpty()) {
+                for (NewsEvent newsEvent : newsEvents) {
+                    System.out.println("Almacenando Evento NEWS: " + newsEvent.getPublishedAt() + " - " + newsEvent.getTitle());
+                    eventStore.storeNews(newsEvent);
                 }
             }
 
@@ -38,4 +45,5 @@ public class EventStoreController {
             }
         }
     }
+
 }
