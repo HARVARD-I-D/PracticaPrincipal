@@ -24,9 +24,7 @@ public class Controller {
             @Override
             public void run() {
                 List<OilPrice> prices = oilProvider.provide();
-                System.out.println("Precios obtenidos: " + prices.size());
                 for (OilPrice price : prices) {
-                    System.out.println("Dato recibido: " + price.getTs() + ", " + price.getValue());
                     oilStore.save(price);
                 }
             }

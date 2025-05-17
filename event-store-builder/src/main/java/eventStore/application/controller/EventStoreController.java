@@ -4,6 +4,7 @@ import eventStore.application.domain.model.OilEvent;
 import eventStore.infrastructure.port.EventHandler;
 import eventStore.infrastructure.port.EventStore;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class EventStoreController {
@@ -15,16 +16,26 @@ public class EventStoreController {
         this.eventStore = eventStore;
     }
 
-    public void run(){
+    public void run() {
         eventHandler.start();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        ArrayList<OilEvent> oilEvents = eventHandler.handleOil();
-        for (OilEvent oilEvent : oilEvents){
-            eventStore.storeOil(oilEvent);
+        System.out.println("Esperando eventos...");
+
+        while (true) {
+            ArrayList<OilEvent> oilEvents = eventHandler.handleOil();
+            if (!oilEvents.isEmpty()) {
+                for (OilEvent oilEvent : oilEvents) {
+                    System.out.println("Almacenando Evento: " + oilEvent.getTsAsString());
+                    eventStore.storeOil(oilEvent);
+                }
+            }
+
+            try {
+                Thread.sleep(1000); // Espera 1 segundo antes de revisar de nuevo
+            } catch (InterruptedException e) {
+                System.out.println("Interrumpido, finalizando...");
+                Thread.currentThread().interrupt();
+                break;
+            }
         }
     }
 }

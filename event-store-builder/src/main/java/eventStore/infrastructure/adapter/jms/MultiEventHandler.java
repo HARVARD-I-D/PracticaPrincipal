@@ -7,6 +7,7 @@ import eventStore.application.domain.model.NewsEvent;
 import eventStore.application.domain.model.OilEvent;
 import eventStore.infrastructure.port.EventHandler;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MultiEventHandler implements EventHandler {
@@ -39,6 +40,7 @@ public class MultiEventHandler implements EventHandler {
                 try{
                     if (message instanceof TextMessage) {
                         String oilMessage = ((TextMessage) message).getText();
+                        System.out.println("Mensaje recibido de JMS: " + oilMessage);
                         processor.OilProccessor(oilMessage);
                         synchronized (oilEvents) {
                             oilEvents.addAll(processor.getParsedOilEvents());
@@ -60,7 +62,9 @@ public class MultiEventHandler implements EventHandler {
     @Override
     public ArrayList<OilEvent> handleOil(){
         synchronized (oilEvents) {
-            return new ArrayList<>(oilEvents);
+            ArrayList<OilEvent> result = new ArrayList<>(oilEvents);
+            oilEvents.clear();
+            return result;
         }
     }
 

@@ -13,9 +13,11 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 public class MultiEventStore implements EventStore {
-    private static final String BASE_DIR = Paths.get(System.getProperty("user.dir")).getParent().resolve("eventstore").toString();
-    private static final String TOPIC_OIL = "OIL_PRICE";
-    private static final String SS_DIR_OIL = "AlphaVantage";
+    private final String BASE_DIR = Paths.get(System.getProperty("user.dir"))
+            .resolve("eventstore")
+            .toString();
+    private final String TOPIC_OIL = "OIL_PRICE";
+    private final String SS_DIR_OIL = "AlphaVantage";
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd");
 
@@ -32,9 +34,9 @@ public class MultiEventStore implements EventStore {
         File file = new File(dir, fileName);
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))){
-            String line = String.format("%s,%f,%s,%s",
+            String line = String.format("%s,%s,%s,%s",
                     oilEvent.getTsAsString(),
-                    oilEvent.getValue(),
+                    Double.toString(oilEvent.getValue()),
                     oilEvent.getType(),
                     oilEvent.getSs());
 

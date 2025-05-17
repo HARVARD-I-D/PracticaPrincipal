@@ -1,12 +1,11 @@
 package businessUnit.infrastructure.adapter.eventStore;
 
+import businessUnit.application.domain.model.NewsEvent;
 import businessUnit.application.domain.model.OilEvent;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -18,6 +17,7 @@ public class HistoricsAccessor {
             .resolve("eventstore")
             .toString();
     private static final String OIL_PRICE = "OIL_PRICE";
+    private static final String NEWS_FEED = "NEWS_FEED";
     private static final String SS_DIR_OIL = "AlphaVantage";
 
     public List<OilEvent> loadHistoricOil(){
@@ -29,7 +29,7 @@ public class HistoricsAccessor {
             return events;
         }
 
-        File[] files = dir.listFiles((d, name) -> name.endsWith(".events"));
+        File[] files = dir.listFiles((_, name) -> name.endsWith(".events"));
         if(files == null) return events;
 
         for(File file : files) {
@@ -48,6 +48,11 @@ public class HistoricsAccessor {
             }
         }
         return events;
+    }
+
+    public List<NewsEvent> loadHistoricNews(){
+        // TODO Crear lo mismo pero para news.
+        return null;
     }
 
     private OilEvent parseLineToOilEvent(String line) {
