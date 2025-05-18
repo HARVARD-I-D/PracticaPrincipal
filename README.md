@@ -61,4 +61,8 @@ Nuestro programa lo conforma un feeder para obtener los precios del petróleo Br
 
 ## Principios y patrones de diseño aplicados
 
-Se han aplicado principios de arquitectura hexagonal para todos los módulos, facilitando así el control de flujo de los datos.
+Para los módulos de nuestro programa hemos decidido usar la arquitectura hexagonal.
+
+Este tipo de arquitectura, que también se conoce como arquitectura de puertos y adaptadores, se caracteriza por separar la aplicación en puertos, de los cuales se obtiene los datos de interés por medio de interfaces públicas, y en adaptadores, que encargan de llamar a los puertos para poder hacer lo que se desee en el dominio principal. 
+
+En nuestro cosa hemos decidido hacer uso de este tipo de arquitectura para facilitar el control del flujo de los datos así como poder manejar las distintas partes del código sin afectar a las otras mientras hacemos pruebas de funcionamiento.
