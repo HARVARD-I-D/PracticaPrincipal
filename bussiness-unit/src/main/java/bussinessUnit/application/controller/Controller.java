@@ -104,6 +104,11 @@ public class Controller {
                     return;
                 default:
                     System.out.println("Opción inválida.");
+
+                //TODO Añadir funcionalidades:
+                //  - Calculadora de diferencia de precios
+                //  - Impresora de noticias relevantes
+                //  - Ultimar detalles
             }
         }
     }
