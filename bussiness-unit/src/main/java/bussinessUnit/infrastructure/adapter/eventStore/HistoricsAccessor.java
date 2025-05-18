@@ -70,7 +70,6 @@ public class HistoricsAccessor implements HistoricsHandler {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
                     NewsEvent event = parseLineToNewsEvent(line);
                     if (event != null) {
                         events.add(event);

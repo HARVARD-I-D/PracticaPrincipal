@@ -1,7 +1,7 @@
 package bussinessUnit;
 
 
-import bussinessUnit.application.Controller;
+import bussinessUnit.application.controller.Controller;
 import bussinessUnit.infrastructure.adapter.broker.BrokerEventService;
 import bussinessUnit.infrastructure.adapter.datamart.SQLiteDatamartRepository;
 import bussinessUnit.infrastructure.adapter.eventStore.HistoricsAccessor;
@@ -14,8 +14,10 @@ public class Main {
 
         Controller controller = new Controller(datamartRepository, historicsAccessor, brokerEventService);
         controller.loadAndStoreHistoricData();
-        controller.runLiveBroker();
 
-        //TODO Crear el CLI o el GUI según de tiempo
+        Thread liveThread = new Thread(controller::runLiveBroker);
+        liveThread.start();
+
+        controller.runCLI();
     }
 }

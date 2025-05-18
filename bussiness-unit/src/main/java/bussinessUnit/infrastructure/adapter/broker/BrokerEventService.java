@@ -36,7 +36,6 @@ public class BrokerEventService implements LiveBroker {
                 try {
                     if (message instanceof TextMessage) {
                         String oilMessage = ((TextMessage) message).getText();
-                        System.out.println("Mensaje de petróleo recibido: " + oilMessage);
                         processor.proccessRawEvent(oilMessage);
                         OilEvent event = processor.getParsedOilEvents();
                         if (event != null) {
@@ -46,7 +45,6 @@ public class BrokerEventService implements LiveBroker {
                                 }
                                 recentOilEvents.add(event);
                             }
-                            System.out.println("Nuevo OilEvent recibido: " + event);
                         }
                     }
                 } catch (JMSException e){
@@ -66,7 +64,6 @@ public class BrokerEventService implements LiveBroker {
                             }
                             recentNewsEvents.add(news);
                         }
-                        System.out.println("Nuevo NewsEvent recibido: " + news.getTitle());
                     }
                 }
             });

@@ -57,7 +57,6 @@ public class OilFormattingProccessor {
             String source = parts[3];
 
             oilEvent = new OilEvent(date, value , type, source);
-            System.out.println(oilEvent.getTsAsString() + " " + oilEvent.getValue());
         } catch (Exception e){
             System.out.println("ERROR FORMATTING PROCCESSOR: Error de filtración: " + oilStoredEvent);
         }

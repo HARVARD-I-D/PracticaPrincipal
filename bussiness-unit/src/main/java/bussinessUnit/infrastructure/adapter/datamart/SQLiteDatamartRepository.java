@@ -20,10 +20,11 @@ public class SQLiteDatamartRepository implements DatamartRepository {
 
             stmt.execute("""
                 CREATE TABLE IF NOT EXISTS oil_events (
-                    date TEXT PRIMARY KEY,
-                    value REAL,
+                    date TEXT,
                     type TEXT,
-                    ss TEXT
+                    value REAL,
+                    ss TEXT,
+                    PRIMARY KEY (date, type)
                 );
             """);
 
@@ -44,10 +45,11 @@ public class SQLiteDatamartRepository implements DatamartRepository {
 
             stmt.execute("""
                 CREATE TABLE IF NOT EXISTS recent_oil_events (
-                    date TEXT PRIMARY KEY,
-                    value REAL,
+                    date TEXT,
                     type TEXT,
-                    ss TEXT
+                    value REAL,
+                    ss TEXT,
+                    PRIMARY KEY (date, type)
                 );
             """);
 
@@ -226,6 +228,33 @@ public class SQLiteDatamartRepository implements DatamartRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return list;
+    }
+
+    public List<OilEvent> getHistoricOilsForGraphs(String type, Instant fromDate) {
+        List<OilEvent> list = new ArrayList<>();
+        String sql = "SELECT * FROM oil_events WHERE type = ? AND date >= ? ORDER BY date ASC";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, type);
+            ps.setString(2, fromDate.toString());
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new OilEvent(
+                        Instant.parse(rs.getString("date")),
+                        rs.getDouble("value"),
+                        rs.getString("ss"),
+                        rs.getString("type")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return list;
     }
 }

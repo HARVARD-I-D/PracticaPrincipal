@@ -3,6 +3,7 @@ package bussinessUnit.infrastructure.port;
 import bussinessUnit.application.domain.model.OilEvent;
 import bussinessUnit.application.domain.model.NewsEvent;
 
+import java.time.Instant;
 import java.util.List;
 
 public interface DatamartRepository {
@@ -13,4 +14,5 @@ public interface DatamartRepository {
 
     List<OilEvent> getLastOilEvents(int count);
     List<NewsEvent> getLastNewsEvents(int count);
+    List<OilEvent> getHistoricOilsForGraphs(String type, Instant fromDate);
 }

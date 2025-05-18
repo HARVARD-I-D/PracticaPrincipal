@@ -3,10 +3,10 @@ package eventStore.application.domain.model;
 import java.time.Instant;
 
 public class OilEvent {
-    private Instant ts;
-    private double value;
-    private String type;
-    private String ss;
+    private final Instant ts;
+    private final Double value;
+    private final String type;
+    private final String ss;
 
 
     public OilEvent(Instant ts, Double value, String type, String ss) {
