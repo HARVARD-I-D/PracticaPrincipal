@@ -32,14 +32,6 @@ public class NewsEvent {
 
     public JsonObject getSource() {return source;}
 
-    public String getSourceAsString() {
-        String sourceStr = "unknown";
-        if (!getSource().isJsonNull()) {
-            sourceStr = getSource().toString();
-        }
-        return sourceStr;
-    }
-
     public String getContent() {return content;}
 
     public String getAuthor() {return author;}

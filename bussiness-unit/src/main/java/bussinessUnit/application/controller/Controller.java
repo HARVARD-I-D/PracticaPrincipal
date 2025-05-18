@@ -116,12 +116,8 @@ public class Controller {
                 case "0":
                     System.out.println("Saliendo del CLI...");
                     return;
-
                 default:
                     System.out.println("Opción inválida.");
-
-                //TODO Añadir funcionalidades:
-                //  - Impresora de noticias relevantes
             }
         }
     }
