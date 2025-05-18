@@ -36,7 +36,7 @@ public class OilEventFeeder implements OilStore {
                     "Type:" + oilPrice.getType() + "," + "Source:" + oilPrice.getSs();
             TextMessage message = session.createTextMessage(text);
             producer.send(message);
-            System.out.println("Enviado Mensaje: " + oilPrice.getTs() + " " + oilPrice.getValue());
+            System.out.println("Enviado Mensaje OIL: " + oilPrice.getTs() + " " + oilPrice.getValue() + " " + oilPrice.getType());
         }
         catch (JMSException e){
             e.printStackTrace();

@@ -2,6 +2,7 @@ package bussinessUnit.application.controller;
 
 import bussinessUnit.application.domain.model.NewsEvent;
 import bussinessUnit.application.domain.model.OilEvent;
+import bussinessUnit.application.service.FinancialCalculator;
 import bussinessUnit.application.service.GraphMaker;
 import bussinessUnit.infrastructure.port.DatamartRepository;
 import bussinessUnit.infrastructure.port.HistoricsHandler;
@@ -75,10 +76,11 @@ public class Controller {
         LocalDate fromDate = LocalDate.now().minusDays(30);
 
         while (true) {
-            System.out.println("\n--- MENÚ CLI ---");
+            System.out.println("\n--- BIENVENIDO A LA TERMINAL McPATO ---");
             System.out.println("1. Ver históricos en gráfica de Brent");
             System.out.println("2. Ver históricos en gráfica de WTI");
             System.out.println("3. Elegir desde qué fecha quiere graficar (actual: " + fromDate.format(formatter) + ")");
+            System.out.println("4. Ver análisis financiero de los últimos precios");
             System.out.println("0. Salir");
             System.out.print("Elija una opción: ");
             String option = scanner.nextLine();
@@ -99,9 +101,13 @@ public class Controller {
                         System.out.println("Fecha inválida. Intente de nuevo.");
                     }
                     break;
+                case "4":
+                    FinancialCalculator.calculateFinancialSummary(datamartRepository);
+                    break;
                 case "0":
                     System.out.println("Saliendo del CLI...");
                     return;
+
                 default:
                     System.out.println("Opción inválida.");
 

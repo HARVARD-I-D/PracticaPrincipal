@@ -123,8 +123,8 @@ public class SQLiteDatamartRepository implements DatamartRepository {
                 list.add(new OilEvent(
                         Instant.parse(rs.getString("date")),
                         rs.getDouble("value"),
-                        rs.getString("ss"),
-                        rs.getString("type")
+                        rs.getString("type"),
+                        rs.getString("ss")
                 ));
             }
         } catch (SQLException e) {

@@ -87,18 +87,15 @@ public class BrokerEventService implements LiveBroker {
     @Override
     public LinkedList<OilEvent> getRecentOilEvents() {
         synchronized (recentOilEvents) {
-            LinkedList<OilEvent> result = new LinkedList<>(recentOilEvents);
-            recentOilEvents.clear();
-            return result;
+            return new LinkedList<>(recentOilEvents);
         }
     }
+
 
     @Override
     public LinkedList<NewsEvent> getRecentNewsEvents() {
         synchronized (recentNewsEvents) {
-            LinkedList<NewsEvent> result = new LinkedList<>(recentNewsEvents);
-            recentNewsEvents.clear();
-            return result;
+            return new LinkedList<>(recentNewsEvents);
         }
     }
 
