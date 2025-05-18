@@ -14,7 +14,11 @@ public class NewsAPIProvider implements NewProvider {
 
 
     public NewsAPIProvider(String apiKey) {
-        url = "https://newsapi.org/v2/everything?q=oil&sortBy=popularity&apiKey=" + apiKey;
+        url = "https://newsapi.org/v2/everything?" +
+                "q=oil%20AND%20market%20NOT%20%22cooking%20oil%22&" +
+                "sortBy=popularity&" +
+                "language=en&" +
+                "apiKey=" + apiKey;
     }
 
     @Override

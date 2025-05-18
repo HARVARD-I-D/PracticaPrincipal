@@ -1,6 +1,5 @@
 package newsFeeder;
 
-
 import newsFeeder.application.controller.NewController;
 import newsFeeder.infrastructure.adapters.api.NewsAPIProvider;
 import newsFeeder.infrastructure.adapters.jms.NewEventFeeder;

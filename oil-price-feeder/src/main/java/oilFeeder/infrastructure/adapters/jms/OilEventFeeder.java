@@ -6,8 +6,8 @@ import oilFeeder.application.domain.model.OilPrice;
 import oilFeeder.infrastructure.port.OilStore;
 
 public class OilEventFeeder implements OilStore {
-    private static final String url = "tcp://localhost:61616";
-    private static String subject = "OIL_PRICE";
+    private final String url = "tcp://localhost:61616";
+    private String subject = "OIL_PRICE";
 
     private Connection connection;
     private Session session;

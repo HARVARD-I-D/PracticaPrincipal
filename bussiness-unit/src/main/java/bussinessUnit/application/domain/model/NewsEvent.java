@@ -1,4 +1,4 @@
-package businessUnit.application.domain.model;
+package bussinessUnit.application.domain.model;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

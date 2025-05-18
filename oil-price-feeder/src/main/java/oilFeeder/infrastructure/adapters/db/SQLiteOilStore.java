@@ -6,7 +6,7 @@ import oilFeeder.infrastructure.port.OilStore;
 import java.sql.*;
 
 public class SQLiteOilStore implements OilStore {
-    private static final String URL = "jdbc:sqlite:oil_prices.db";
+    private final String URL = "jdbc:sqlite:oil_prices.db";
 
     public SQLiteOilStore() {
         try (Connection conn = DriverManager.getConnection(URL);

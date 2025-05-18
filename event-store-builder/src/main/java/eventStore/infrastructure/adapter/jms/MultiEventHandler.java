@@ -11,9 +11,9 @@ import eventStore.infrastructure.port.EventHandler;
 import java.util.ArrayList;
 
 public class MultiEventHandler implements EventHandler {
-    private static final String url = "tcp://localhost:61616";
-    private static String OIL_PRICE = "OIL_PRICE";
-    private static String NEWS_FEED = "NEWS_FEED";
+    private final String url = "tcp://localhost:61616";
+    private String OIL_PRICE = "OIL_PRICE";
+    private String NEWS_FEED = "NEWS_FEED";
 
     private Connection connection;
     private Session session;
@@ -21,8 +21,8 @@ public class MultiEventHandler implements EventHandler {
     private final ArrayList<OilEvent> oilEvents = new ArrayList<>();
     private final ArrayList<NewsEvent> newsEvents = new ArrayList<>();
 
-    private static final String OIL_SUBSCRIPTION_NAME = "OilPriceSubscription";
-    private static final String NEWS_SUBSCRIPTION_NAME = "NewsFeedSubscription";
+    private final String OIL_SUBSCRIPTION_NAME = "OilPriceSubscription";
+    private final String NEWS_SUBSCRIPTION_NAME = "NewsFeedSubscription";
 
     @Override
     public void start(){
@@ -64,7 +64,6 @@ public class MultiEventHandler implements EventHandler {
                         synchronized (newsEvents) {
                             newsEvents.add(newsEvent);
                         }
-
                         System.out.println("Mensaje de noticia recibido: " + newsEvent.getPublishedAt() + " - " + newsEvent.getTitle());
                     }
                 } catch (JMSException e) {

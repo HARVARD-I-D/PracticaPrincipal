@@ -1,5 +1,6 @@
 package eventStore.infrastructure.adapter.store;
 
+import com.google.gson.Gson;
 import eventStore.application.domain.model.NewsEvent;
 import eventStore.application.domain.model.OilEvent;
 import eventStore.infrastructure.port.EventStore;
@@ -19,7 +20,7 @@ public class MultiEventStore implements EventStore {
     private final String TOPIC_OIL = "OIL_PRICE";
     private final String SS_DIR_OIL = "AlphaVantage";
 
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd");
+    private final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd");
 
     @Override
     public void storeOil(OilEvent oilEvent) {
@@ -36,7 +37,7 @@ public class MultiEventStore implements EventStore {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             String line = String.format("%s,%s,%s,%s",
                     oilEvent.getTsAsString(),
-                    Double.toString(oilEvent.getValue()),
+                    oilEvent.getValue(),
                     oilEvent.getType(),
                     oilEvent.getSs());
 
@@ -64,18 +65,14 @@ public class MultiEventStore implements EventStore {
         File file = new File(dir, fileName);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            String line = String.format("%s|%s|%s|%s|%s",
-                    newsEvent.getPublishedAt(),
-                    newsEvent.getTitle().replaceAll("\\|", " "),
-                    newsEvent.getAuthor(),
-                    newsEvent.getSourceAsMap().get("name"),
-                    newsEvent.getUrl());
+            String json = new Gson().toJson(newsEvent);
 
-            writer.write(line);
+            writer.write(json);
             writer.newLine();
         } catch (IOException e) {
             System.err.println("Error al escribir evento de noticia en archivo: " + file.getAbsolutePath());
             e.printStackTrace();
         }
     }
+
 }

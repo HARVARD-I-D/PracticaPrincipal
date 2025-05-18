@@ -6,7 +6,7 @@ import oilFeeder.application.controller.Controller;
 
 public class Main {
     public static void main(String[] args) {
-        AlphaVantageProvider oilProvider = new AlphaVantageProvider(args[1]);
+        AlphaVantageProvider oilProvider = new AlphaVantageProvider(args[0]);
         OilEventFeeder oilEventFeeder = new OilEventFeeder();
         Controller controller = new Controller(oilProvider, oilEventFeeder);
 

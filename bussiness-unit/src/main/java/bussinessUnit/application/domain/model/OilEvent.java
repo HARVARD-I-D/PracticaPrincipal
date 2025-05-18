@@ -1,4 +1,4 @@
-package businessUnit.application.domain.model;
+package bussinessUnit.application.domain.model;
 
 import java.time.Instant;
 

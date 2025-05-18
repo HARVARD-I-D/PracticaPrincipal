@@ -7,8 +7,8 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 
 
 public class NewEventFeeder implements NewStore {
-    private static final String url = "tcp://localhost:61616";
-    private static String subject = "NEWS_FEED";
+    private final String url = "tcp://localhost:61616";
+    private String subject = "NEWS_FEED";
 
     private Connection connection;
     private Session session;
