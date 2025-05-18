@@ -14,31 +14,37 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class GraphMaker {
-    public void mostrarGrafica(String tipo, LocalDate desdeFecha, DatamartRepository datamartRepository) {
-        Instant fromInstant = desdeFecha.atStartOfDay().toInstant(ZoneOffset.UTC);
-        List<OilEvent> eventos = datamartRepository.getHistoricOilsForGraphs(tipo, fromInstant);
+    public void showChart(String type, LocalDate fromDate, DatamartRepository datamartRepository) {
+        Instant fromInstant = fromDate.atStartOfDay().toInstant(ZoneOffset.UTC);
+        List<OilEvent> events = datamartRepository.getHistoricOilsForGraphs(type, fromInstant);
 
-        if (eventos.isEmpty()) {
-            System.out.println("No hay datos disponibles para " + tipo + " desde " + desdeFecha);
+        List<OilEvent> filteredEvents = events.stream()
+                .filter(event -> event.getValue() != null && event.getValue() != 0.0)
+                .collect(Collectors.toList());
+
+        if (filteredEvents.isEmpty()) {
+            System.out.println("No data available for " + type + " from " + fromDate + " (after filtering invalid values)");
             return;
         }
 
-        List<Date> fechas = eventos.stream()
+        List<Date> dates = filteredEvents.stream()
                 .map(event -> Date.from(event.getTs()))
                 .collect(Collectors.toList());
 
-        List<Double> precios = eventos.stream()
+        List<Double> prices = filteredEvents.stream()
                 .map(OilEvent::getValue)
                 .collect(Collectors.toList());
 
         XYChart chart = new XYChartBuilder()
                 .width(800).height(600)
-                .title("Histórico " + tipo)
-                .xAxisTitle("Fecha")
-                .yAxisTitle("Precio")
+                .title("Historical " + type)
+                .xAxisTitle("Date")
+                .yAxisTitle("Price")
                 .build();
 
-        chart.addSeries(tipo, fechas, precios);
+        chart.addSeries(type, dates, prices);
         new SwingWrapper<>(chart).displayChart();
     }
+
+
 }

@@ -2,6 +2,7 @@ package bussinessUnit.application.controller;
 
 import bussinessUnit.application.domain.model.NewsEvent;
 import bussinessUnit.application.domain.model.OilEvent;
+import bussinessUnit.application.service.BreakingNewsAccessor;
 import bussinessUnit.application.service.FinancialCalculator;
 import bussinessUnit.application.service.GraphMaker;
 import bussinessUnit.infrastructure.port.DatamartRepository;
@@ -18,12 +19,16 @@ public class Controller {
     private final HistoricsHandler historicsHandler;
     private final LiveBroker liveBroker;
     private final GraphMaker graphMaker;
+    private final FinancialCalculator calculator;
+    private final BreakingNewsAccessor breakingNewsAccessor;
 
     public Controller(DatamartRepository datamartRepository, HistoricsHandler historicsHandler, LiveBroker liveBroker) {
         this.datamartRepository = datamartRepository;
         this.historicsHandler = historicsHandler;
         this.liveBroker = liveBroker;
         this.graphMaker = new GraphMaker();
+        this.calculator = new FinancialCalculator();
+        this.breakingNewsAccessor = new BreakingNewsAccessor();
     }
 
     public void loadAndStoreHistoricData() {
@@ -61,7 +66,7 @@ public class Controller {
             }
 
             try {
-                Thread.sleep(1000); // Espera 1 segundo antes de revisar de nuevo
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.println("Interrumpido, finalizando...");
                 Thread.currentThread().interrupt();
@@ -81,16 +86,17 @@ public class Controller {
             System.out.println("2. Ver históricos en gráfica de WTI");
             System.out.println("3. Elegir desde qué fecha quiere graficar (actual: " + fromDate.format(formatter) + ")");
             System.out.println("4. Ver análisis financiero de los últimos precios");
+            System.out.println("5. Ultimas noticias relevantes");
             System.out.println("0. Salir");
             System.out.print("Elija una opción: ");
             String option = scanner.nextLine();
 
             switch (option) {
                 case "1":
-                    graphMaker.mostrarGrafica("Brent", fromDate, datamartRepository);
+                    graphMaker.showChart("Brent", fromDate, datamartRepository);
                     break;
                 case "2":
-                    graphMaker.mostrarGrafica("WTI", fromDate, datamartRepository);
+                    graphMaker.showChart("WTI", fromDate, datamartRepository);
                     break;
                 case "3":
                     System.out.print("Ingrese fecha en formato yyyy-MM-dd: ");
@@ -102,7 +108,10 @@ public class Controller {
                     }
                     break;
                 case "4":
-                    FinancialCalculator.calculateFinancialSummary(datamartRepository);
+                    calculator.calculateFinancialSummary(datamartRepository);
+                    break;
+                case "5":
+                    breakingNewsAccessor.printLatestNews(datamartRepository);
                     break;
                 case "0":
                     System.out.println("Saliendo del CLI...");
@@ -112,9 +121,7 @@ public class Controller {
                     System.out.println("Opción inválida.");
 
                 //TODO Añadir funcionalidades:
-                //  - Calculadora de diferencia de precios
                 //  - Impresora de noticias relevantes
-                //  - Ultimar detalles
             }
         }
     }

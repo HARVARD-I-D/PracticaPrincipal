@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public class FinancialCalculator {
-    public static void calculateFinancialSummary(DatamartRepository repository){
+    public void calculateFinancialSummary(DatamartRepository repository){
         List<OilEvent> recent = repository.getLastOilEvents(100);
         for (OilEvent event : recent){
             System.out.println("Precios recientes:");
@@ -38,7 +38,7 @@ public class FinancialCalculator {
         analizar("WTI", wtiEvents);
     }
 
-    private static void analizar(String tipo, List<OilEvent> eventosRecientes){
+    private void analizar(String tipo, List<OilEvent> eventosRecientes){
         if(eventosRecientes.size() < 2) {
             System.out.println("No hay suficientes datos recientes para " + tipo);
             return;

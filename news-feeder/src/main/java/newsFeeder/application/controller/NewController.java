@@ -24,9 +24,7 @@ public class NewController {
             @Override
             public void run(){
                 List<New> news = newProvider.provide();
-                System.out.println("Noticias obtenidas: " + news.size());
                 for (New aNew : news) {
-                    System.out.println("Información recibida: " + aNew.getPublishedAt() + ", " + aNew.getTitle());
                     newStore.save(aNew);
                 }
             }
