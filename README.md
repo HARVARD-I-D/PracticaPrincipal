@@ -11,22 +11,25 @@ El programa es una implementación de una terminal financiera básica, mostrando
 2. Herramientas para análisis técnico (gráficas con capacidad para definir el rango temporal deseado)
 3. Acceso a las últimas noticias relevantes para el sector.
 
-El programa tiene accesso a datos en tiempo real sobre los precios del petróleo crudo Brent y del petróleo crudo West Texas Intermediate (WTI), así como las noticias acerca del petróleo y otros componentes relacionados a estos. 
+El programa tiene accesso a datos en tiempo real sobre los precios del petróleo crudo Brent y del petróleo crudo West Texas Intermediate (WTI), así como las noticias acerca del petróleo y otros componentes relacionados a estos.
+
 Por medio de esta aplicación podemos observar y analizar a tiempo real la situación del petróleo crudo así como observar las repercusiones públicas de esta. Hemos tomado como referencias el petróleo Brent y el WTI debido a que el petróleo Brent es el referente para los mercados europeos, el petróleo WTI se utiliza como punto de referencia en la fijación de precios del petróleo.
 
 ## APIs y diseño del Datamart
 
 Las APIs utilizadas son NewsAPI y AlphaVantage, APIs públicas que ofrecen información a tiempo real de la información necesaria para nuestro programa. 
+
 NewsAPI ofrece artículos de distintas fuentes de información globales de cualquier tema de interés que podemos filtrar de cualquier forma que consideremos apropiada para obtener los artículos que queramos. 
+
 AlphaAdvantage ofrece información del mercado de valores de distintos elementos obtenida a través de distintas fuentes de confianza.
 
 ## Instrucciones de Ejecución
 
 1. Crear un broker de ActiveMQ en la máquina en la que se esté ejecutando.
-2. Ejecutar event-store-builder para inicializar suscriptores.
-3. Introducir keys en los argumentos de arranque de los feeders.
-4. Ejecutar feeders.
-5. Ejecutar unidad de negocio.
+3. Ejecutar event-store-builder para inicializar suscriptores.
+4. Introducir keys en los argumentos de arranque de los feeders.
+5. Ejecutar feeders.
+6. Ejecutar unidad de negocio.
 
 Así se asegura que se creen los ficheros de eventstore para que la unidad de negocio pueda acceder a ellos. A partir de ahí, probar las funcionalidades del programa con la interfaz CLI.
 
@@ -35,10 +38,10 @@ La primera ejecución debería tardar alrededor de un minuto en completarse.
 ## Ejemplos de Uso
 
 Podemos utilizar la aplicación para:
-2. Obtener la gráfica con la tendencia durante el periodo de tiempo que le interese del precio del petróleo Brent.
-3. Obtener la gráfica con la tendencia durante el periodo de tiempo que quiera estudiar del precio del petróleo WTI.
-4. Obtener la tabla de las noticias más recientes relacionadas con el petróleo.
-5. Obtener un informe financiero con los datos del petróleo Brent y WTI por separado.
+1. Obtener la gráfica con la tendencia durante el periodo de tiempo que le interese del precio del petróleo Brent.
+2. Obtener la gráfica con la tendencia durante el periodo de tiempo que quiera estudiar del precio del petróleo WTI.
+3. Obtener la tabla de las noticias más recientes relacionadas con el petróleo.
+4. Obtener un informe financiero con los datos del petróleo Brent y WTI por separado.
 
 ## Arquitectura de sistema y arquitectura de la aplicación:
 
