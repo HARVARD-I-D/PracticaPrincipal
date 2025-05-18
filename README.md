@@ -11,7 +11,7 @@ El programa es una implementación de una terminal financiera básica, mostrando
 2. Herramientas para análisis técnico (gráficas con capacidad para definir el rango temporal deseado)
 3. Acceso a las últimas noticias relevantes para el sector.
 
-El programa tiene accesso a datos en tiempo real, y 
+El programa tiene accesso a datos en tiempo real sobre los precios del petróleo Brent y del petróleo WTI, así como las noticias acerca del petróleo y otros componentes relacionados a estos.
 
 ## APIs y diseño del Datamart
 
@@ -31,7 +31,21 @@ La primera ejecución debería tardar alrededor de un minuto en completarse.
 
 (Ejemplos de uso (consultas, peticiones REST, etc.))
 
-(Arquitectura de sistema y arquitectura de la aplicación (con diagramas))
+Arquitectura de sistema y arquitectura de la aplicación:
+
+Nuestro programa lo conforma un feeder para obtener los precios del petróleo Brent y WTI, otro feeder para obener las noticias, el constructor para almacenar los eventos, y la unidad de negocio que permite obsevar los datos a través de informes, gráficas y tablas. A continuación se presentan los diagramas de clases para mayor explicación del funcionamiento del programa.  
+
+![Imagen de WhatsApp 2025-05-18 a las 21 46 27_b8c43b1c](https://github.com/user-attachments/assets/24083d3b-e7d8-4e22-b139-1d62c7bdd2c3)
+
+![Imagen de WhatsApp 2025-05-18 a las 21 47 05_66f7c7ab](https://github.com/user-attachments/assets/0a20947c-e972-480c-b99b-dc19ccfb318f)
+
+![Imagen de WhatsApp 2025-05-18 a las 21 50 57_94d6f60b](https://github.com/user-attachments/assets/f0bcca03-5f49-448e-b5c8-072d43f8b914)
+
+![Imagen de WhatsApp 2025-05-18 a las 21 51 46_ffb85c91](https://github.com/user-attachments/assets/dbcdbed4-50af-40b7-9594-3567853fe212)
+
+![Imagen de WhatsApp 2025-05-18 a las 21 52 22_16c6ab79](https://github.com/user-attachments/assets/bb9404ae-33e7-4770-a8f4-66341781c625)
+
+
 
 ## Principios y patrones de diseño aplicados
 
