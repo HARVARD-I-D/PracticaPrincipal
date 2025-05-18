@@ -32,8 +32,12 @@ public class NewsEvent {
 
     public JsonObject getSource() {return source;}
 
-    public HashMap getSourceAsMap() {
-        return new Gson().fromJson(getSource(), HashMap.class);
+    public String getSourceAsString() {
+        String sourceStr = "unknown";
+        if (!getSource().isJsonNull()) {
+            sourceStr = getSource().toString();
+        }
+        return sourceStr;
     }
 
     public String getContent() {return content;}
